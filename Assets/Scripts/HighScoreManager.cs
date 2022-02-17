@@ -48,7 +48,9 @@ public class HighScoreManager : MonoBehaviour
 
     public void addScore(int score, string playerName)
     {
+        Debug.Log($"Adding Score {score} {playerName}");
         ScoreInfo newRecord = new ScoreInfo(score, playerName);
+        bool scoreAdded = false;
         if (scores.Count > 0)
         {
             for (int i = 0; i < scores.Count; i++)
@@ -56,11 +58,13 @@ public class HighScoreManager : MonoBehaviour
                 if (scores[i].score < newRecord.score)
                 {
                     scores.Insert(i, newRecord);
+                    scoreAdded = true;
                     break;
                 }
             }
         }
-        else
+        
+        if (!scoreAdded)
         {
             scores.Add(newRecord);
         }
